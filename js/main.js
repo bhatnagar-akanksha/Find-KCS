@@ -8,13 +8,56 @@ var test=[
         'ticketID':'E-12343444'
     },
         {
-            'name':"KCS TITLE1",
+            'name':"KCS TITLE8",
+            'description':"testetstets",
+            'createdBy':'Shruti Pradhan',
+            'createdOn':'12-06-2024',
+            'tags':['test-feeds','warehouse'],
+            'ticketID':'E-1234555',
+        },
+        {
+            'name':"KCS TITLE2",
             'description':"testetstets",
             'createdBy':'Akanksha Bhatnagar',
             'createdOn':'12-06-2024',
             'tags':['test-feeds','warehouse'],
-            'ticketID':'E-1234555',
+            'ticketID':'E-1256788',
+        },
+        {
+            'name':"KCS TITLE0",
+            'description':"testetstets",
+            'createdBy':'Rishita',
+            'createdOn':'12-06-2024',
+            'tags':['test-feeds','warehouse'],
+            'ticketID':'E-123497',
+        },
+        {
+            'name':"KCS TITLE4",
+            'description':"testetstets",
+            'createdBy':'Faraz',
+            'createdOn':'12-06-2024',
+            'tags':['test-feeds','warehouse'],
+            'ticketID':'E-123546567',
+        },
+        {
+            'name':"KCS TITLE5",
+            'description':"testetstets",
+            'createdBy':'Nilotpal',
+            'createdOn':'12-06-2024',
+            'tags':['calcudated matrics','warehouse'],
+            'ticketID':'E-12345557',
+        },
+        {
+            'name':"KCS TITLE6",
+            'description':"testetstets",
+            'createdBy':'Akanksha Bhatnagar',
+            'createdOn':'12-06-2024',
+            'tags':['segment','warehouse'],
+            'ticketID':'E-123455455',
         }
+
+
+
 
 ]
     
@@ -22,8 +65,8 @@ function format(d) {
     // `d` is the original data object for the row
     return (
         '<dl>' +
-        '<dt style="display= inline-block">Description:</dt>' +
-        '<dd style="display= inline-block">' +
+        '<dt style="display: inline-block">Description:</dt>' +
+        '<dd style="display: inline-block">' +
         d.description +
         '</dd>' +
         '</dl>'
