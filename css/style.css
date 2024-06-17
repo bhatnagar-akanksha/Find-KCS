@@ -1,0 +1,24 @@
+body{
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+}
+
+.header-bar {
+    height: 40px; /* 25px of the viewport height */
+    background-color: grey; /* grey background color */
+}
+
+.table-container{
+    padding: 20px;
+    background-color: #eeeeee54;
+}
+.tags{
+    background-color: #1fba30;
+    width: fit-content;
+    padding: 4px;
+    border-radius: 12px;
+    color: white;
+    font-weight: 600;
+
+}
