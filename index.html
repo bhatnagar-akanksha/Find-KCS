@@ -9,9 +9,41 @@
 </head>
 <body >
     <div class="container">
-    <div class="header">
-        <div class="header-bar"></div> 
-    </div>
+    <!-- <div class="header-main"> -->
+        <div class="toolbar">
+            <div class="title">Toolbar Title</div>
+            <button class="button" id="toggleToolbar">Show Toolbar</button>
+        </div>
+
+        <div class="toolbar secondary-toolbar" id="secondary-toolbar" style="margin-top:5px; background-color: #A982BC">
+            <div class="dropdowns">
+                <select class="dropdown" aria-placeholder="Quater">
+                    <option value="option1">Option 1</option>
+                    <option value="option2">Option 2</option>
+                    <option value="option3">Option 3</option>
+                </select>
+                <select class="dropdown" aria-placeholder="Tags">
+                    <option value="option1">Option 1</option>
+                    <option value="option2">Option 2</option>
+                    <option value="option3">Option 3</option>
+                </select>
+                <select class="dropdown" aria-placeholder="tpc">
+                    <option value="option1">Option 1</option>
+                    <option value="option2">Option 2</option>
+                    <option value="option3">Option 3</option>
+                </select>
+            </div>
+            <button class="button add-button">Add</button>
+        </div>
+    
+        <!-- <div class="toolbar">
+            <div class="title">Toolbar Title</div>
+            <button class="button">Click Me</button>
+        </div> -->
+    <!-- </div> -->
+    <!-- <div class="header-secondary">
+        <div class="tool-bar"></div> 
+    </div> -->
     <div class="table-container">
         <table id="myTable" class="display"  data-order='[[ 3, "asc" ]]' data-page-length='10'>
             <thead>
@@ -21,9 +53,10 @@
                     <th>Tags</th>
                     <th>Created on</th>
                     <th>Created by</th>
-                    <th>Ticket Associated</th>
+                    <th>CJA</th>
                     <th>Description</th>
-                    
+                    <th>Delete</th>
+                        
                 </tr>
             </thead>
             <tbody>
