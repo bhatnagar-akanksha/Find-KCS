@@ -5,35 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/datatable.css">
+    <link rel="stylesheet" href="css/chosen1.8.7.css">
+
     <title>KCS  Collection</title>
 </head>
 <body >
     <div class="container">
     <!-- <div class="header-main"> -->
         <div class="toolbar">
-            <div class="title">Toolbar Title</div>
+            <div class="title">KCS Collection</div>
             <button class="button" id="toggleToolbar">Show Toolbar</button>
         </div>
 
-        <div class="toolbar secondary-toolbar" id="secondary-toolbar" style="margin-top:5px; background-color: #A982BC">
+        <div class="toolbar secondary-toolbar" id="secondary-toolbar" style="margin-top:5px; background-color: #6e5494">
             <div class="dropdowns">
-                <select class="dropdown" aria-placeholder="Quater">
-                    <option value="option1">Option 1</option>
-                    <option value="option2">Option 2</option>
-                    <option value="option3">Option 3</option>
+                <select  placeholder="Quater" multiple class="chosen-select" id="quater">
+                    <option value="2023-Q1">2023-Q1</option>
+                    <option value="2023-Q2">2023-Q2</option>
+                    <option value="2023-Q3">2023-Q3</option>
+                    <option value="2023-Q4">2023-Q4</option>
+                    <option value="2024-Q1">2024-Q1</option>
+                    <option value="2024-Q2">2024-Q2</option>
+                    <option value="2024-Q3">2024-Q3</option>
+                    <option value="2024-Q4">2024-Q4</option>
                 </select>
-                <select class="dropdown" aria-placeholder="Tags">
-                    <option value="option1">Option 1</option>
-                    <option value="option2">Option 2</option>
-                    <option value="option3">Option 3</option>
+                <select  aria-placeholder="Tags" multiple class="chosen-select" id="tags">
+                   
                 </select>
-                <select class="dropdown" aria-placeholder="tpc">
-                    <option value="option1">Option 1</option>
-                    <option value="option2">Option 2</option>
-                    <option value="option3">Option 3</option>
+                <select  aria-placeholder="publisherName" multiple class="chosen-select" id="publisherName">
+                    <option value="Shruti Pradhan">Shruti Pradhan</option>
+                    <option value="Mohammad Faizan">Mohammad Faizan</option>
+                    <option value="Nilotpal Bharti">Nilotpal Bharti</option>
                 </select>
             </div>
-            <button class="button add-button">Add</button>
+            <button class="button add-button" id='filter' style=" margin-left: -426px;" >Filter</button>
+            <button class="button add-button" >Add</button>
         </div>
     
         <!-- <div class="toolbar">
@@ -49,12 +55,12 @@
             <thead>
                 <tr>
                     <th></th>
-                    <th>KCS Name</th>
+                    <th>KCS Subject</th>
                     <th>Tags</th>
                     <th>Created on</th>
                     <th>Created by</th>
                     <th>CJA</th>
-                    <th>Description</th>
+                    <th>articleURL</th>
                     <th>Delete</th>
                         
                 </tr>
@@ -68,5 +74,6 @@
     <script src="./js/jquery3.7.1.min.js"></script>
     <script src="./js/datatable.js"></script>  
     <script src="./js/main.js"></script>
+    <script src="./js/chose1.9.7.js"></script>
 </body>
 </html>
