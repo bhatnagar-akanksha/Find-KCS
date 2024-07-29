@@ -88,3 +88,6 @@ body{
     color: #0c6fcf;
     text-decoration: underline;
 }
+.button-right {
+    margin-left: auto;
+  }
