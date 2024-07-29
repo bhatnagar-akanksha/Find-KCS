@@ -178,7 +178,7 @@ let Sheet1=[
    ]
 
 $(document).ready(function() {
-    $('#publisherName').chosen();
+    // $('#publisherName').chosen();
     $('#quater').chosen();
     drawtable(Sheet1)
     const tagSet = new Set();          
@@ -198,6 +198,21 @@ $(document).ready(function() {
     // Initialize Chosen on the select element
     $('#tags').chosen();
     console.log('dropdown')
+
+      // Extract unique publisher names and populate new dropdown
+      var uniquePublisherNames = [...new Set(Sheet1.map(item => item.publisherName))];
+
+      // Populate the dropdown
+      var $publisherDropdown = $('#publisherName');
+      uniquePublisherNames.forEach(function(name) {
+        $publisherDropdown.append($('<option>', {
+          value: name,
+          text: name
+        }));
+      });
+
+      // Initialize Chosen
+      $(".chosen-select").chosen({width: "200px"});
     
 });
 $('#filter').on('click',function(){
