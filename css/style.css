@@ -7,12 +7,15 @@ body{
 
 }
 
+.chosen-container {
+    width: 200px !important;
+}
 .table-container{
     padding: 20px;
     background-color: #eeeeee54;
 }
 .tags{
-    background-color: #A982BC;
+    background-color: #6e5494;
     width: fit-content;
     padding: 4px;
     border-radius: 12px;
@@ -79,4 +82,9 @@ body{
 
 .add-button:hover {
     background-color: #45a049;
+}
+
+.link{
+    color: #0c6fcf;
+    text-decoration: underline;
 }
