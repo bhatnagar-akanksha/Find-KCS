@@ -20,14 +20,14 @@
         <div class="toolbar secondary-toolbar" id="secondary-toolbar" style="margin-top:5px; background-color: #6e5494">
             <div class="dropdowns">
                 <select   data-placeholder="Select Quarters" multiple class="chosen-select" id="quater">
-                    <option value="2023-Q1">2023-Q1</option>
-                    <option value="2023-Q2">2023-Q2</option>
-                    <option value="2023-Q3">2023-Q3</option>
-                    <option value="2023-Q4">2023-Q4</option>
                     <option value="2024-Q1">2024-Q1</option>
                     <option value="2024-Q2">2024-Q2</option>
                     <option value="2024-Q3">2024-Q3</option>
                     <option value="2024-Q4">2024-Q4</option>
+                    <option value="2023-Q1">2023-Q1</option>
+                    <option value="2023-Q2">2023-Q2</option>
+                    <option value="2023-Q3">2023-Q3</option>
+                    <option value="2023-Q4">2023-Q4</option>
                 </select>
                 <select  data-placeholder="Select Tags" multiple class="chosen-select" id="tags">
                    
@@ -40,7 +40,7 @@
                
             </div>
             <button class="button add-button" id='filter' style="margin-left: 10px;" >Filter</button>
-            <button class="button add-button button-right" >Add</button>
+            <button class="button add-button button-right" id="add-new">Add</button>
         </div>
     
         <!-- <div class="toolbar">
@@ -70,6 +70,38 @@
             </tbody>
         </table>
 
+    </div>
+
+    <!-- Form -->
+    <div id="formModal">
+        <div id="formContent">
+            <span class="close">&times;</span>
+            <form id="articleForm">
+                <label for="createdOn">Created On:</label>
+                <input type="text" id="createdOn" name="createdOn" value="" required placeholder="MM/DD/YYYY"><br><br>
+    
+                <label for="publisherName">Publisher Name:</label>
+                <input type="text" id="publisherName" name="publisherName" value="" required><br><br>
+    
+                <label for="Subject">Subject:</label>
+                <input type="text" id="subject" name="subject" value="" required><br><br>
+    
+                <label for="choosetags">Tags:</label>
+                <select  data-placeholder="Select tags" multiple id="choosetags" name="choosetags"  required>
+                </select><br>
+    
+                <a href="#" id="addTagLink">Add New Tag</a>
+                <div id="newTagInput">
+                    <input type="text" id="newTag" placeholder="Enter new tag">
+                    <button type="button" id="addTagBtn" >Add Tag</button>
+                </div><br><br>
+
+               <label for="articleURL">Article URL:</label>
+                <input type="url" id="articleURL" name="articleURL" value="" required><br><br>
+    
+                <button type="submit">Submit</button>
+            </form>
+        </div>
     </div>
     </div>
     <script src="./js/jquery3.7.1.min.js"></script>

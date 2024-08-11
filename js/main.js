@@ -181,7 +181,7 @@ $(document).ready(function() {
     // $('#publisherName').chosen();
     $('#quater').chosen();
     drawtable(Sheet1)
-    const tagSet = new Set();          
+    var tagSet = new Set();          
     // Iterate over JSON data to extract tag names
    Sheet1.forEach(item => {
         item.tag.forEach(tag => {
@@ -213,6 +213,84 @@ $(document).ready(function() {
 
       // Initialize Chosen
       $(".chosen-select").chosen({width: "200px"});
+          // Open the form modal
+          $('#add-new').click(function() {
+            $('#formModal').show();
+            tagSet.forEach(tag => {
+                console.log(tag)
+                const option = $('<option></option>').attr('value', tag).text(tag);
+                $('#choosetags').append(option);
+            });
+            $('#choosetags').chosen();
+             // Add the new tag to the dropdown and update Chosen
+        $('#addTagBtn').click(function() {
+            var newTag = $('#newTag').val().trim();
+            if (newTag !== "") {
+                // Add new option to the select element
+                $('#choosetags').append(new Option(newTag, newTag));
+
+                // Update the Chosen dropdown
+                $('#choosetags').trigger('chosen:updated');
+
+                // Automatically select the new tag
+                $('#choosetags').val([...$('#tags').val(), newTag]).trigger('chosen:updated');
+
+                // Clear the input field
+                $('#newTag').val("");
+
+                // Hide the input box after adding the tag
+                $('#newTagInput').hide();
+            }
+        });
+        
+        $('#articleForm').submit(function(event) {
+            event.preventDefault();
+
+            var createdOn = $('#createdOn').val();
+            var publisherName = $('#publisherName').val();
+            var subject = $('#subject').val();
+            var articleURL = $('#articleURL').val();
+            var tags = $('#tags').val();
+
+            var formData = {
+                "createdOn": createdOn,
+                "publisherName": publisherName,
+                "subject": subject,
+                "articleURL": articleURL,
+                "tags": tags
+            };
+
+            console.log("Form Data Submitted:", formData);
+            
+            $('#articleForm input').val('');
+            $('#choosetags').val([]); // For multiple select dropdowns
+            $('#choosetags').trigger('chosen:updated'); // Update the Chosen dropdown
+            // Close the form modal after submission
+            $('#formModal').hide();
+        });
+        });
+
+        // Close the form modal
+        $('.close').click(function() {
+           $('#articleForm input').val('');
+           $('#choosetags').val([]); // For multiple select dropdowns
+           $('#choosetags').trigger('chosen:updated'); // Update the Chosen dropdown
+            $('#formModal').hide();
+
+        });
+
+        // Close the modal when clicking outside the form
+        $(window).click(function(event) {
+            if (event.target.id === 'formModal') {
+                $('#formModal').hide();
+            }
+        });
+
+        // Show the new tag input when the "Add New Tag" link is clicked
+        $('#addTagLink').click(function(event) {
+            event.preventDefault();
+            $('#newTagInput').show();
+        });
     
 });
 $('#filter').on('click',function(){
@@ -223,7 +301,6 @@ $('#filter').on('click',function(){
 
        if(filteredData.length>0){
         dataTable.destroy();
-        console.log(filteredData)
         // Redraw DataTable with new JSON data
          drawtable(JSON.parse(filteredData))
        }
@@ -247,8 +324,38 @@ $('#filter').on('click',function(){
 //         console.log('Selected options:', selectedOptions);
 //     });
 // });
+function getQuarter(dateString) {
+    var parts = dateString.split("/");
+    var month = parseInt(parts[0]);
 
-function filterData(selectedQuater,selectedPublisher,selectedtag){
+    if (month == 1 || month == 2 || month == 12) {
+        return "Q1";
+    } else if (month >= 3 && month <= 5) {
+        return "Q2";
+    } else if (month >= 6 && month <= 8) {
+        return "Q3";
+    } else if (month >= 9 && month <= 11) {
+        return "Q4";
+    } else {
+        return "Invalid month";
+    }
+}
+function filterDataByQuarters(selectedQuarters) {
+    var filterDataByQuarter= Sheet1.filter(function(item) {
+        var itemYear = item.createdOn.split("/")[2]; // Extract year from date
+        var itemQuarter = getQuarter(item.createdOn);
+
+        return selectedQuarters.some(function(selectedQuarter) {
+            var [selectedYear, selectedQuarterOnly] = selectedQuarter.split("-");
+            return itemYear === selectedYear && itemQuarter === selectedQuarterOnly;
+        });
+    });
+  return filterDataByQuarter;
+}
+function filterData(selectedQuarters,selectedPublisher,selectedtag){
+
+    let quarterMatch = filterDataByQuarters(selectedQuarters);
+    console.log('quatrermatch', quarterMatch)
 
     const filteredData = Sheet1.filter(item => {
         //  const publisherMatch = selectedPublisher.length === 0 || item.publisherName.some(publisher => selectedPublishers.includes(publisher));
@@ -257,7 +364,14 @@ function filterData(selectedQuater,selectedPublisher,selectedtag){
         //revisit
         const tagMatch = selectedtag.length === 0 || item.tag.some(tag => selectedtag.includes(tag));
 
-        return publisherMatch && tagMatch;
+        //return  quarterMatch && publisherMatch && tagMatch;
+        return quarterMatch.filter(function(obj1) {
+            return publisherMatch.some(function(obj2) {
+                return JSON.stringify(obj1) === JSON.stringify(obj2);
+            }) && tagMatch.some(function(obj3) {
+                return JSON.stringify(obj1) === JSON.stringify(obj3);
+            });
+        });
     });
 
    let updatedData= JSON.stringify(filteredData, null, 2);
@@ -277,9 +391,9 @@ function format(d) {
 }
 
 function drawtable(tableData){
-    dataTable=''
      dataTable = new DataTable('#myTable', {
         data:tableData,
+        width:100,
         columns: [
            {
                className: 'dt-control',
@@ -309,7 +423,7 @@ function drawtable(tableData){
                render: function (data, type, row, meta) {
                
                 if(row.tag !=undefined){
-                    console.log(row,row.tag,row.tag.length)
+                    //console.log(row,row.tag,row.tag.length)
                     if(row.tag.length >0){
                         return `<p class='tags'>${row.tag[0]}</p>`;
                       }
