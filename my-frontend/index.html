@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/datatable.css">
+    <link rel="stylesheet" href="css/chosen1.8.7.css">
+    <link rel="stylesheet" href="css/fontawsome.css">
+    <title> Login Page</title>
+    <style>
+        /* General body styling */
+        .login {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 90vh;
+            margin: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        /* Application title styling */
+   
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+        <!-- <div class="header-main"> -->
+            <div class="toolbar">
+                <div class="title">KCS Vault</div>
+                <!-- <button class="button" id="add-user" title="coming soon" >Add user</button> -->
+            </div>
+    
+    <!-- Application title -->
+    <div class="login">
+    <!-- <div class="app-title">KCS Vault </div> -->
+    <!-- Login form container -->
+    <div class="login-container">
+        <div id="welcomeMessage">Welcome, User!</div>
+        <input type="text" id='ldap' placeholder="Enter your Ldap" required>
+        <!-- <input type="password" placeholder="Password" required> -->
+        <button id="loginButton">Log In</button>
+        <!-- <button class="optional-button">Optional Button</button> -->
+    </div>
+    </div>
+    </div>
+    <script src="./js/jquery3.7.1.min.js"></script>
+    <script type="module" src="./js/users.js"></script>
+    <script type="module" src="./js/fontAwsome.js"></script>
+    <script type="module" src="./js/notify.js"></script>
+    <script type="module" src="./js/login.js"></script>
+
+</body>
+
+</html>

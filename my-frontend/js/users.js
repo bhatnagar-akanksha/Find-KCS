@@ -1,0 +1,33 @@
+const allusers =[
+  { "name": "Abhinav Srivastav", "role": "Contributor", "ldap": "asrivastav@adobe.com" },
+  { "name": "Abhishek Joshi", "role": "Contributor", "ldap": "abjoshi@adobe.com" },
+  { "name": "Aditya Saraswat", "role": "Contributor", "ldap": "adsaraswat@adobe.com" },
+  { "name": "Akanksha Bhatnagar", "role": "Admin", "ldap": "akankshab@adobe.com" },
+  { "name": "Akriti Arora", "role": "Contributor", "ldap": "akritia@adobe.com" },
+  { "name": "Dhananjay Kathuria", "role": "Contributor", "ldap": "dkathuria@adobe.com" },
+  { "name": "Faraz Husain", "role": "Contributor", "ldap": "fhusain@adobe.com" },
+  { "name": "George Varghese", "role": "Admin", "ldap": "gvarghes@adobe.com" },
+  { "name": "Harshil Gambhir", "role": "Contributor", "ldap": "hgambhir@adobe.com" },
+  { "name": "Ishan Sinha", "role": "Admin", "ldap": "isinha@adobe.com" },
+  { "name": "Khurshid Alam", "role": "Admin", "ldap": "kalam@adobe.com" },
+  { "name": "L Manoj", "role": "Admin", "ldap": "mal@adobe.com" },
+  { "name": "Lovekesh Kumar", "role": "Contributor", "ldap": "lovekeshk@adobe.com" },
+  { "name": "Manpreet Kaur Sodhi", "role": "Contributor", "ldap": "manpreetkaur@adobe.com" },
+  { "name": "Maurice Rana", "role": "Contributor", "ldap": "mauricer@adobe.com" },
+  { "name": "Mohammad Faizan", "role": "Contributor", "ldap": "mohammadf@adobe.com" },
+  { "name": "Nikita Sharma", "role": "Contributor", "ldap": "nikitasharma@adobe.com" },
+  { "name": "Nilotpal Bharti", "role": "Contributor", "ldap": "nilotpalb@adobe.com" },
+  { "name": "Payal Mishra Gera", "role": "Admin", "ldap": "pgera@adobe.com" },
+  { "name": "Pooja Deorari", "role": "Contributor", "ldap": "pdeorari@adobe.com" },
+  { "name": "Preyansh Jain", "role": "Contributor", "ldap": "preyanshj@adobe.com" },
+  { "name": "Prince Kumar Parwat", "role": "Contributor", "ldap": "princekumar@adobe.com" },
+  { "name": "Rishita Gaur", "role": "Contributor", "ldap": "rgaur@adobe.com" },
+  { "name": "Shivam Upadhyay", "role": "Contributor", "ldap": "supadhyay@adobe.com" },
+  { "name": "Shruti Pradhan", "role": "Contributor", "ldap": "shrpradhan@adobe.com" },
+  { "name": "Shubham Sharma", "role": "Contributor", "ldap": "shusharma@adobe.com" },
+  { "name": "Vasant Singh Negi", "role": "Contributor", "ldap": "vasants@adobe.com" },
+  { "name": "Vidur Bhatnagar", "role": "Contributor", "ldap": "vibhatna@adobe.com" },
+  { "name": "Yash Singh", "role": "Contributor", "ldap": "yashsingh@adobe.com" }
+]
+
+window.allusers = allusers;

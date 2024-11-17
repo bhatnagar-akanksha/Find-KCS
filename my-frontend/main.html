@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/datatable.css">
+    <link rel="stylesheet" href="css/chosen1.8.7.css">
+    <link rel="stylesheet" href="css/fontawsome.css">
+
+    <title>KCS Vault</title>
+</head>
+<body >
+    <div class="container">
+    <!-- <div class="header-main"> -->
+        <div class="toolbar">
+            <div class="title">KCS Vault</div>
+            <button class="user-button" id="userButton"><i class="fa-solid fa-user-tie"></i></button>
+            <div id="userTooltip" class="tooltip"></div>
+
+        </div>
+
+        <div class="toolbar secondary-toolbar" id="secondary-toolbar" style="margin-top:5px; background-color: #6e5494">
+            <div class="dropdowns">
+                <select data-placeholder="Select Quarters" multiple class="chosen-select" id="quater">
+                    <option value="2024-Q1">2024-Q1</option>
+                    <option value="2024-Q2">2024-Q2</option>
+                    <option value="2024-Q3">2024-Q3</option>
+                    <option value="2024-Q4">2024-Q4</option>
+                    <option value="2023-Q1">2023-Q1</option>
+                    <option value="2023-Q2">2023-Q2</option>
+                    <option value="2023-Q3">2023-Q3</option>
+                    <option value="2023-Q4">2023-Q4</option>
+                </select>
+                <select data-placeholder="Select Tags" multiple class="chosen-select" id="tags">
+                   
+                </select>
+                <select  data-placeholder="Select Publishers" multiple class="chosen-select" id="publisherName">
+                </select>
+               
+            </div>
+            <div style="flex-grow: 1;"><button class="button add-button" id='filter' style="margin-left: 10px;" ><i class="fa-solid fa-filter"></i></button></div>
+            <div>
+            <button id="download-btn" class="button button-right" title="Download CSV"><i class="fa-solid fa-download"></i></button>
+            <button class="button add-button button-right" id="add-new">Add</button></div>
+        </div>
+    
+    <div class="table-container">
+        <table id="myTable" class="display"  data-order='[[ 3, "asc" ]]' data-page-length='10' style="width: 100%;">
+            <thead>
+                <tr>
+                    <th>Article Subject</th>
+                    <th>Link</th>
+                    <th>Tags</th>
+                    <th>Published on</th>
+                    <th>Published by</th>
+                    <th>CJA</th>
+                    <th>ArticleURL</th>
+                    <th>Publication Scope</th>
+                    <th>Status</th>
+                    <th>Leads Action</th>
+                        
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Form -->
+    <div id="formModal">
+        <div id="formContent">
+            <span class="close">&times;</span>
+            <form id="articleForm">
+                <!-- Created On -->
+                <label for="createdOn" >Created On:</label>
+                <input type="text" id="createdOn" name="createdOn" value="" required placeholder="MM/DD/YYYY" />
+    
+                <!-- Publisher Name -->
+                <label for="enterpublisherName">Publisher Name:</label>
+                
+                <select id="enterpublisherName" name="enterpublisherName" value="" data-placeholder="Select Publisher Name" required multiple></select>
+    
+                <!-- Subject -->
+                <label for="subject">Subject:</label>
+                <input type="text" id="subject" name="subject" value="" required />
+    
+                <!-- Tags -->
+                <label for="choosetags">Tags:</label>
+                <select data-placeholder="Select tags" multiple id="choosetags" name="choosetags" required></select>
+    
+                <!-- Add New Tag Section -->
+                <!-- <a href="#" id="addTagLink">Add New Tag</a>
+                <div id="newTagInput" style="display: none;">
+                    <input type="text" id="newTag" placeholder="Enter new tag" />
+                    <button type="button" id="addTagBtn">Add Tag</button>
+                </div><br /><br /> -->
+    
+                <!-- Article URL -->
+                <label for="articleURL">Article URL:</label>
+                <input type="url" id="articleURL" name="articleURL" value="" required />
+    
+                <!-- CJA -->
+                <label for="cja">CJA:</label>
+                <select data-placeholder="Select CJA" id="cja" name="cja" required>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+                <!-- Submit Button -->
+                <button type="submit" id="articleFormSubmit">Submit</button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- open popup approve -->
+    <div class="popupDiv">
+        <div class="popupContent">
+            <span class="closeComment">&times;</span>
+            <form class="popup">
+                <label for="comment">Comment</label>
+                <input type="text" class="comment" name="comment" value="" required placeholder="Status update comments"><br>
+                <div class='publicationScopeDiv' style="display: none;">
+                <label for="cja">Publication Scope;</label>
+                <select  data-placeholder="publicationScope" class="publicationScope" name="publicationScope"  required>
+                <option value="Internal" selected>Internal</option>
+                <option value="External">External</option>
+                </select>
+            </div><br>
+               <button class='submitComment' >Submit</button>
+            </form>
+        </div>
+    </div>
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <h3>Are you sure you want to delete?</h3>
+            <button class="btn-yes">Yes</button>
+            <button class="btn-no" >No</button>
+        </div>
+    </div>
+    <div class="loader-overlay" id="loaderOverlay">
+        <div class="spinner"></div>
+    </div>
+    </div>
+    <script src="./js/jquery3.7.1.min.js"></script>
+    <script src="./js/datatable.js"></script>  
+    <script src="./js/chose1.9.7.js"></script>
+    <script type="module" src="./js/addArticle.js"></script>
+    <script type="module" src="./js/fontAwsome.js"></script>
+    <script type="module" src="./js/notify.js"></script>
+    <script type="module" src="./js/downloadCSV.js"></script>
+    <script type="module" src="./js/users.js"></script>
+    <script type="module" src="./js/tags.js"></script>
+    <script type="module" src="./js/main.js"></script>
+</body>
+</html>

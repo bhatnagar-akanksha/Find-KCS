@@ -1,0 +1,184 @@
+function filterDataByQuarters(selectedQuarters) {
+  var filterDataByQuarter = Sheet1.filter(function (item) {
+    var itemYear = item.createdOn.split("/")[2]; // Extract year from date
+    var itemQuarter = getQuarter(item.createdOn);
+
+    return selectedQuarters.some(function (selectedQuarter) {
+      var [selectedYear, selectedQuarterOnly] = selectedQuarter.split("-");
+      return itemYear === selectedYear && itemQuarter === selectedQuarterOnly;
+    });
+  });
+  return filterDataByQuarter;
+}
+// function getCommonObjects(...jsonArrays) {
+//     // Filter out empty arrays
+//     console.log(jsonArrays)
+//     const nonEmptyArrays = jsonArrays.filter(arr => arr.length > 0);
+
+//     if (nonEmptyArrays.length === 0) {
+//         return []; // Return an empty array if all JSON arrays are empty
+//     }
+
+//     // Convert objects to a string to easily find common objects
+//     const stringify = obj => JSON.stringify(obj);
+
+//     // Get common objects by comparing all non-empty JSON arrays
+//     const commonObjects = nonEmptyArrays
+//         .reduce((common, currentArray) => {
+//             const currentSet = new Set(currentArray.map(stringify));
+//             return common.filter(item => currentSet.has(stringify(item)));
+//         }, nonEmptyArrays[0]);
+
+//     return commonObjects;
+// }
+
+function findCommonObjectsAllSelected(array1, array2, array3) {
+  let uniqueCommonObjects = [];
+  if (array1.length === 0 || array2.length === 0 || array3.length === 0) {
+    console.log([]);
+  } else {
+    // Combine all arrays into one and map each articleId to the number of occurrences
+    const combined = [...array1, ...array2, ...array3];
+
+    const occurrenceMap = new Map();
+
+    combined.forEach((item) => {
+      if (occurrenceMap.has(item.articleId)) {
+        occurrenceMap.set(
+          item.articleId,
+          occurrenceMap.get(item.articleId) + 1
+        );
+      } else {
+        occurrenceMap.set(item.articleId, 1);
+      }
+    });
+
+    // Filter to find articleIds that appear in all three arrays
+    const commonIds = Array.from(occurrenceMap)
+      .filter(([key, value]) => value === 3)
+      .map(([key, value]) => key);
+
+    // Filter the original arrays to get the objects corresponding to the common IDs
+    const commonObjects = combined.filter((item) =>
+      commonIds.includes(item.articleId)
+    );
+console.log('co>>>>>',commonIds,occurrenceMap,(commonObjects))
+    // Remove duplicates if needed (in case the same object is present multiple times)
+    uniqueCommonObjects = Array.from(
+      new Map(commonObjects.map((item) => [item.articleId, item])).values()
+    );
+
+    console.log(uniqueCommonObjects);
+  }
+  return uniqueCommonObjects;
+}
+function findCommonObjectsanyTwoselected(array1, array2) {
+  let uniqueCommonObject = [];
+  if (array1.length === 0 || array2.length === 0) {
+    console.log([]);
+  } else {
+    // Combine both arrays into one and map each articleId to the number of occurrences
+    const combined = [...array1, ...array2];
+
+    const occurrenceMap = new Map();
+
+    combined.forEach((item) => {
+      if (occurrenceMap.has(item.articleId)) {
+        occurrenceMap.set(
+          item.articleId,
+          occurrenceMap.get(item.articleId) + 1
+        );
+      } else {
+        occurrenceMap.set(item.articleId, 1);
+      }
+    });
+
+    // Filter to find articleIds that appear in both arrays
+    const commonIds = Array.from(occurrenceMap)
+      .filter(([key, value]) => value === 2) // Ensure the ID is in both arrays
+      .map(([key, value]) => key);
+
+    // Filter the original arrays to get the objects corresponding to the common IDs
+    const commonObjects = combined.filter((item) =>
+      commonIds.includes(item.articleId)
+    );
+
+    // Remove duplicates if needed (in case the same object is present multiple times)
+    uniqueCommonObject = Array.from(
+      new Map(commonObjects.map((item) => [item.articleId, item])).values()
+    );
+  }
+  return uniqueCommonObject;
+}
+
+function filterData(selectedQuarters, selectedPublisher, selectedtag) {
+  let publisherMatch = [];
+  let tagMatch = [];
+  let quarterMatch = filterDataByQuarters(selectedQuarters);
+
+  if (selectedPublisher.length > 0) {
+    publisherMatch = Sheet1.filter(
+      (item) =>
+        selectedPublisher.includes(item.publisherName) ||
+        selectedPublisher.length === 0
+    );
+  } else {
+    publisherMatch = [];
+  }
+
+  if (selectedtag.length > 0) {
+    tagMatch = Sheet1.filter((item) =>
+      item.tag.some((tag) => selectedtag.includes(tag))
+    );
+    console.log("tag>>", tagMatch);
+  } else {
+    tagMatch = [];
+  }
+  console.log(quarterMatch, publisherMatch, tagMatch);
+  let result = [];
+  if (
+    selectedQuarters.length > 0 &&
+    selectedPublisher.length > 0 &&
+    selectedtag.length > 0
+  ) {
+    result = findCommonObjectsAllSelected(
+      quarterMatch,
+      publisherMatch,
+      tagMatch
+    );
+  } else if (selectedQuarters.length > 0 && selectedPublisher.length > 0) {
+    result = findCommonObjectsanyTwoselected(quarterMatch, publisherMatch);
+  } else if (selectedPublisher.length > 0 && selectedtag.length > 0) {
+    result = findCommonObjectsanyTwoselected(publisherMatch, tagMatch);
+  } else if (selectedQuarters.length > 0 && selectedtag.length > 0) {
+    result = findCommonObjectsanyTwoselected(quarterMatch, tagMatch);
+  } else if (selectedQuarters.length > 0) {
+    result = quarterMatch;
+  } else if (selectedPublisher.length > 0) {
+    result = publisherMatch;
+  } else if (selectedtag.length > 0) {
+    result = tagMatch;
+  } else {
+    console.log(`nothing is selected`);
+  }
+  console.log("result", result);
+  return result;
+
+}
+
+function getQuarter(dateString) {
+  var parts = dateString.split("/");
+  var month = parseInt(parts[0]);
+
+  if (month == 1 || month == 2 || month == 12) {
+    return "Q1";
+  } else if (month >= 3 && month <= 5) {
+    return "Q2";
+  } else if (month >= 6 && month <= 8) {
+    return "Q3";
+  } else if (month >= 9 && month <= 11) {
+    return "Q4";
+  } else {
+    return "Invalid month";
+  }
+}
